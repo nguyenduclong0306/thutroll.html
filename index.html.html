@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>💌 Lá Thư Troll Siêu Cầu Vồng 💌</title>
+  <style>
+    body {
+      background: #ffe4e1;
+      font-family: 'Segoe UI', sans-serif;
+      text-align: center;
+      padding-top: 100px;
+      overflow: hidden;
+      transition: all 0.3s ease-in-out;
+    }
+
+    h1 {
+      color: #ff3b5c;
+      font-size: 7.5em; /* Kích thước chữ đã được tăng gấp 3 lần so với ban đầu */
+    }
+
+    input {
+      padding: 10px;      
+      font-size: 16px;
+      border-radius: 8px;
+      border: none;
+      margin-top: 100px;
+      width: 200px;
+    } 
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      margin-top: 10px;
+      border-radius: 8px;
+      border: none;
+      background-color: #ff5e78;
+      color: white;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background-color: #ff3b5c;
+    }
+
+    #message {
+      margin-top: 30px;
+      font-size: 20px;
+      color: #333;
+      height: 50px;
+      min-height: 50px;
+    }
+
+    #result {
+      display: none;
+      margin-top: 30px;
+    }
+
+    .image-container {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 20px;
+      opacity: 0;
+      animation: fadeIn 3s forwards;
+    }
+
+    .image-container img {
+      width: 200px;
+      border-radius: 20px;
+      box-shadow: 0px 0px 20px rgba(0,0,0,0.2);
+      animation: moveUp 1s ease-out forwards;
+    }
+
+    .image-container img:nth-child(odd) {
+      animation-delay: 0.5s;
+    }
+
+    .image-container img:nth-child(even) {
+      animation-delay: 1s;
+    }
+
+    @keyframes fadeIn {
+      0% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+
+    @keyframes moveUp {
+      0% { transform: translateY(50px); opacity: 0; }
+      100% { transform: translateY(0); opacity: 1; }
+    }
+
+    .cursor {
+      display: inline-block;
+      width: 8px;
+      background-color: black;
+      animation: blink 1s infinite;
+      margin-left: 3px;
+    }
+
+    @keyframes blink {
+      0%, 50% { opacity: 1; }
+      51%, 100% { opacity: 0; }
+    }
+
+    .rainbow {
+      font-weight: bold;
+      text-shadow: 1px 1px 2px black;
+      font-size: 6em; /* Kích thước chữ được tăng lên */
+    }
+
+    /* Hiệu ứng nổ */
+    @keyframes boomFlash {
+      0%   { background: white; }
+      20%  { background: #ff4c4c; }
+      40%  { background: white; }
+      60%  { background: #ff4c4c; }
+      80%  { background: white; }
+      100% { background: #ffe4e1; }
+    }
+
+    @keyframes shake {
+      0% { transform: translate(0, 0); }
+      25% { transform: translate(-10px, 10px); }
+      50% { transform: translate(10px, -10px); }
+      75% { transform: translate(-10px, 10px); }
+      100% { transform: translate(0, 0); }
+    }
+
+    .boom {
+      animation: boomFlash 1s ease-in-out, shake 0.5s ease-in-out;
+    }
+
+  </style>
+</head>
+<body>
+
+  <h1>💌 Một lá thư bí mật dành cho bạn 💌</h1>
+  <input type="password" id="password" placeholder="Nhập mật khẩu..." />
+  <br>
+  <button onclick="checkPassword()">📬 Xem thư</button>
+
+  <div id="message"></div>
+
+  <div id="result">
+    <div id="typing"></div>
+
+    <!-- Khung ảnh -->
+    <div class="image-container">
+      <img src="c:\Users\ADMIN\Downloads\OneDrive\Hình ảnh\Camera Roll\5ee8fb85-9ff4-49bb-91ee-4329945b3109.jpg" alt="Ảnh của tôi 1" />
+      <img src="c:\Users\ADMIN\Downloads\OneDrive\Hình ảnh\Camera Roll\6bd84b28-1975-4b9f-ae48-e39c347e0954.jpg" alt="Ảnh của tôi 2" />
+      <img src="c:\Users\ADMIN\Downloads\OneDrive\Hình ảnh\Camera Roll\79c0a5a4-44d6-4ba4-98b9-f8d3bcc89e3c.jpg" alt="Ảnh của tôi 3" />
+      <img src="c:\Users\ADMIN\Downloads\OneDrive\Hình ảnh\Camera Roll\c26c1e47-1f7d-455b-b241-6ee18f09b3ea.jpg" alt="Ảnh của tôi 4" />
+      <img src="c:\Users\ADMIN\Downloads\OneDrive\Hình ảnh\Camera Roll\tải xuống (1).jpg" alt="Ảnh của tôi 5" />
+    </div>
+  </div>
+
+  <script>
+    const secretPassword = "longdeptrai"; // Mật khẩu
+    const message = document.getElementById("message");
+    const result = document.getElementById("result");
+    const typing = document.getElementById("typing");
+
+    function checkPassword() {
+      const pw = document.getElementById("password").value;
+      if (pw === secretPassword) {
+        document.querySelector("input").style.display = "none";
+        document.querySelector("button").style.display = "none";
+        message.innerText = "Đang mở thư... 😈";
+
+        // 🎆 Hiệu ứng nổ
+        document.body.classList.add("boom");
+
+        // Xóa hiệu ứng sau khi nổ xong
+        setTimeout(() => {
+          document.body.classList.remove("boom");
+          startTyping();
+        }, 1000); // Sau 1s khi nổ
+      } else {
+        message.innerText = "Sai mật khẩu rồi nha 😜";
+      }
+    }
+
+    function getRandomColor() {
+      const colors = [
+        '#FF4C4C', // đỏ tươi
+        '#FF8800', // cam đậm
+        '#FFD700', // vàng đậm
+        '#32CD32', // xanh lá
+        '#1E90FF', // xanh dương đậm
+        '#8A2BE2', // tím đậm
+        '#FF1493'  // hồng đậm
+      ];
+      return colors[Math.floor(Math.random() * colors.length)];
+    }
+
+    function startTyping() {
+      message.style.display = "none";
+      result.style.display = "block";
+
+      const text = "NHỮNG THẰNG MẶT LỒN";
+      let index = 0;
+      typing.innerHTML = "";
+
+      const cursor = document.createElement("span");
+      cursor.className = "cursor";
+      typing.appendChild(cursor);
+
+      const interval = setInterval(() => {
+        if (index < text.length) {
+          const span = document.createElement("span");
+          span.textContent = text[index];
+          span.style.color = getRandomColor();
+          span.classList.add("rainbow");
+          cursor.insertAdjacentElement("beforebegin", span);
+          index++;
+        } else {
+          clearInterval(interval);
+          cursor.remove();
+        }
+      }, 60); // tốc độ gõ
+    }
+  </script>
+
+</body>
+</html>
